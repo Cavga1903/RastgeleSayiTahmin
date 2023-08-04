@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tahmin Oyunu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        hr {
+            margin: 20px auto;
+            width: 50%;
+        }
+
+        #result {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        #guess-input {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tahmin Oyunu</h1>
+    <label id="guess-label">1. tahmini girin: </label>
+    <input type="number" id="guess-input" min="1" max="100">
+    <button onclick="checkGuess()">Tahmin Yap</button>
+    <hr>
+    <p id="result"></p>
+
+    <script>
+        let randomNum = Math.floor(Math.random() * 100) + 1;
+        let numGuesses = 1;
+
+        function checkGuess() {
+            let guess = parseInt(document.getElementById("guess-input").value);
+
+            if (guess === randomNum) {
+                document.getElementById("result").innerText = `Sayı ${numGuesses} adet denemede bulundu.`;
+            } else if (numGuesses === 7) {
+                document.getElementById("result").innerText = "Deneme hakkınız kalmadı. Kaybettiniz.";
+            } else {
+                let message = guess < randomNum ? "Daha büyük bir sayı girin." : "Daha küçük bir sayı girin.";
+                document.getElementById("result").innerText = message;
+                numGuesses++;
+                document.getElementById("guess-label").innerText = `${numGuesses}. tahmini girin: `;
+            }
+        }
+    </script>
+</body>
+</html>
